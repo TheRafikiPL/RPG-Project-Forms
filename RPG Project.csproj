@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{52E6A5E0-8088-4CFE-9CB0-B8D8C8222807}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>RPG_Project</RootNamespace>
+    <AssemblyName>RPG Project</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UserControls\BattleControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\BattleControl.Designer.cs">
+      <DependentUpon>BattleControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\BattleProperties.cs" />
+    <Compile Include="UserControls\BattleLog.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\BattleLog.Designer.cs">
+      <DependentUpon>BattleLog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\CharacterControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\CharacterControl.Designer.cs">
+      <DependentUpon>CharacterControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\Character.cs" />
+    <Compile Include="Classes\Enums.cs" />
+    <Compile Include="Classes\NavigationControl.cs" />
+    <Compile Include="Classes\Skill.cs" />
+    <Compile Include="UserControls\CharacterStatus.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\CharacterStatus.Designer.cs">
+      <DependentUpon>CharacterStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\CharacterView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\CharacterView.Designer.cs">
+      <DependentUpon>CharacterView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\MainControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\MainControl.Designer.cs">
+      <DependentUpon>MainControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NavigationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NavigationForm.Designer.cs">
+      <DependentUpon>NavigationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="UserControls\BattleControl.resx">
+      <DependentUpon>BattleControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\BattleLog.resx">
+      <DependentUpon>BattleLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\CharacterControl.resx">
+      <DependentUpon>CharacterControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\CharacterStatus.resx">
+      <DependentUpon>CharacterStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\CharacterView.resx">
+      <DependentUpon>CharacterView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\MainControl.resx">
+      <DependentUpon>MainControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NavigationForm.resx">
+      <DependentUpon>NavigationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\placeholderCharacter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\physicalPlaceholder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\firePlaceholder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icePlaceholder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\windPlaceholder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\elecPlaceholder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\darkPlaceholder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lightPlaceholder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\error_none.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\almightyPlaceholder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\turnTruePlaceholder.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
