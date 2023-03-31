@@ -26,5 +26,9 @@ namespace RPG_Project.UserControls
             barMP.Maximum = c.Mana;
             barMP.Value = c.CurrentMana;
         }
+        public void MenImDead()
+        {
+            lblName.ForeColor = Color.Red;
+        }
     }
 }

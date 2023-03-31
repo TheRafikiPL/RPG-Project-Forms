@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 
 namespace RPG_Project
 {
-    public class Character : IComparable<Character>
+    public class Character
     {
+        Guid id;
         string name;
         int health;
         int currentHealth;
@@ -26,6 +27,7 @@ namespace RPG_Project
         List<Effect> effects;
         public Character(string name, int health, int mana, int strength, int magic, int dexterity, int agility, int luck)
         {
+            id = new Guid();
             this.name = name;
             this.health = health;
             this.currentHealth = health;
@@ -106,19 +108,6 @@ namespace RPG_Project
         {
             return sprite;
         }
-
-        public int CompareTo(Character other)
-        {
-            if(agility < other.Agility)
-            {
-                return -1;
-            }
-            if(agility > other.Agility)
-            {
-                return 1;
-            }
-            return 0;
-        }
         public void AddEffect(Effect e)
         {
             effects.Add(e);
@@ -134,6 +123,55 @@ namespace RPG_Project
         public AffinityRelation CheckAffinityRelation(Affinity aff)
         {
             return affinities[BattleProperties.AffinityToInt(aff)];
+        }
+        public static bool operator <(Character a, Character b)
+        {
+            return a.agility < b.agility;
+        }
+        public static bool operator >(Character a, Character b)
+        {
+            return a.agility > b.agility;
+        }
+        public static bool operator <=(Character a, Character b)
+        {
+            return a.agility <= b.agility;
+        }
+        public static bool operator >=(Character a, Character b)
+        {
+            return a.agility >= b.agility;
+        }
+        public static bool operator ==(Character a, Character b)
+        {
+            return a.id == b.id;
+        }
+        public static bool operator !=(Character a, Character b)
+        {
+            return a.id != b.id;
+        }
+        public void AddHP(int hp)
+        {
+            currentHealth += hp;
+            if (currentHealth > health)
+            {
+                currentHealth = health;
+            }
+        }
+        public void SubHP(int hp)
+        {
+            currentHealth -= hp;
+            if (currentHealth < 0)
+            {
+                currentHealth = 0;
+                AddEffect(Effect.KNOCKDOWN);
+            }
+        }
+        public void SubMana(int mp)
+        {
+            currentMana -= mp;
+            if (currentMana < 0)
+            {
+                currentMana = 0;
+            }
         }
     }
 }

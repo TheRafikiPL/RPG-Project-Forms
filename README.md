@@ -3,4 +3,6 @@
  
  This version is written in WinForms. Later will be ported to Unity.
  
+ Battle view works but AI in that moment chooses targets and skills randomly.
+
  [WORK IN PROGRESS]

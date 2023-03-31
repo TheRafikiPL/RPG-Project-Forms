@@ -15,6 +15,47 @@ namespace RPG_Project
         static public List<Character> Troops = new List<Character>(); 
         static public List<Skill> SkillList = new List<Skill>();
         static public bool IsPlayerTurn = true;
+        static public void CalculateTurns(AffinityRelation af)
+        {
+            switch(af)
+            {
+                case AffinityRelation.WEAK:
+                    PressTurn();
+                    break;
+                case AffinityRelation.NULL:
+                    DeleteTurns(2);
+                    break;
+                case AffinityRelation.REPEL:
+                    DeleteTurns(Turns.Count);
+                    break;
+                default:
+                    DeleteTurns();
+                    break;
+            }
+        }
+        static public void PressTurn()
+        {
+            for (int i = Turns.Count-1; i >= 0; i--)
+            {
+                if (Turns[i])
+                {
+                    Turns[i] = false;
+                    return;
+                }
+            }
+            Turns.RemoveAt(Turns.Count-1);
+        }
+        static public void DeleteTurns(int quantity=1)
+        {
+            if(quantity > Turns.Count)
+            {
+                quantity = Turns.Count;
+            }
+            for (int i = 0; i < quantity; i++)
+            {
+                Turns.RemoveAt(Turns.Count - 1);
+            }
+        }
         static public int AffinityToInt(Affinity aff)
         {
             switch(aff)

@@ -140,10 +140,21 @@ namespace RPG_Project.UserControls
                     affinityCombo5.SelectedIndex = Convert.ToInt32(sr.ReadLine());
                     affinityCombo6.SelectedIndex = Convert.ToInt32(sr.ReadLine());
                     affinityCombo7.SelectedIndex = Convert.ToInt32(sr.ReadLine());
-                    while(!sr.EndOfStream)
+                    int toCheck = Convert.ToInt32(sr.ReadLine());
+                    for (int i = 0; i < skillDataGrid.Rows.Count; i++)
                     {
-                        skillDataGrid.Rows[Convert.ToInt32(sr.ReadLine())].Cells[0].Value = true;
+                        skillDataGrid.Rows[i].Cells[0].Value = false;
+                        if (i==toCheck)
+                        {
+                            skillDataGrid.Rows[i].Cells[0].Value = true;
+                            toCheck = Convert.ToInt32(sr.ReadLine());
+                            if(sr.EndOfStream)
+                            {
+                                break;
+                            }
+                        }
                     }
+                    
                     sr.Close();
                 }
                 

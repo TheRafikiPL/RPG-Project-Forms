@@ -39,20 +39,22 @@
             this.partySprite2 = new System.Windows.Forms.PictureBox();
             this.partySprite1 = new System.Windows.Forms.PictureBox();
             this.battleUIPanel = new System.Windows.Forms.Panel();
-            this.battleLog = new RPG_Project.UserControls.BattleLog();
             this.btnCancelCast = new System.Windows.Forms.Button();
-            this.listTargets = new System.Windows.Forms.ListBox();
             this.txtSkillDesc = new System.Windows.Forms.TextBox();
-            this.characterStatus4 = new RPG_Project.UserControls.CharacterStatus();
-            this.characterStatus3 = new RPG_Project.UserControls.CharacterStatus();
-            this.characterStatus2 = new RPG_Project.UserControls.CharacterStatus();
-            this.characterStatus1 = new RPG_Project.UserControls.CharacterStatus();
             this.skillList = new System.Windows.Forms.DataGridView();
+            this.listTargets = new System.Windows.Forms.ListBox();
             this.skillId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.skillDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.skillName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.skillCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.skillAffinity = new System.Windows.Forms.DataGridViewImageColumn();
+            this.IsAvailable = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.battleLog = new RPG_Project.UserControls.BattleLog();
+            this.characterStatus4 = new RPG_Project.UserControls.CharacterStatus();
+            this.characterStatus3 = new RPG_Project.UserControls.CharacterStatus();
+            this.characterStatus2 = new RPG_Project.UserControls.CharacterStatus();
+            this.characterStatus1 = new RPG_Project.UserControls.CharacterStatus();
+            this.lblWinLose = new System.Windows.Forms.Label();
             this.battlePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.enemySprite)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.partySprite4)).BeginInit();
@@ -76,6 +78,7 @@
             // 
             // battlePanel
             // 
+            this.battlePanel.Controls.Add(this.lblWinLose);
             this.battlePanel.Controls.Add(this.flowTurnsPanel);
             this.battlePanel.Controls.Add(this.lblEnemyHP);
             this.battlePanel.Controls.Add(this.enemyHPBar);
@@ -178,13 +181,6 @@
             this.battleUIPanel.Size = new System.Drawing.Size(1280, 198);
             this.battleUIPanel.TabIndex = 2;
             // 
-            // battleLog
-            // 
-            this.battleLog.Location = new System.Drawing.Point(424, 3);
-            this.battleLog.Name = "battleLog";
-            this.battleLog.Size = new System.Drawing.Size(346, 187);
-            this.battleLog.TabIndex = 8;
-            // 
             // btnCancelCast
             // 
             this.btnCancelCast.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
@@ -197,16 +193,6 @@
             this.btnCancelCast.Visible = false;
             this.btnCancelCast.Click += new System.EventHandler(this.btnCancelCast_Click);
             // 
-            // listTargets
-            // 
-            this.listTargets.FormattingEnabled = true;
-            this.listTargets.Location = new System.Drawing.Point(3, 0);
-            this.listTargets.Name = "listTargets";
-            this.listTargets.Size = new System.Drawing.Size(209, 199);
-            this.listTargets.TabIndex = 6;
-            this.listTargets.Visible = false;
-            this.listTargets.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listTargets_MouseDoubleClick);
-            // 
             // txtSkillDesc
             // 
             this.txtSkillDesc.Location = new System.Drawing.Point(215, 3);
@@ -216,38 +202,6 @@
             this.txtSkillDesc.Size = new System.Drawing.Size(203, 187);
             this.txtSkillDesc.TabIndex = 5;
             this.txtSkillDesc.Visible = false;
-            // 
-            // characterStatus4
-            // 
-            this.characterStatus4.Location = new System.Drawing.Point(776, 147);
-            this.characterStatus4.Name = "characterStatus4";
-            this.characterStatus4.Size = new System.Drawing.Size(501, 47);
-            this.characterStatus4.TabIndex = 4;
-            this.characterStatus4.Visible = false;
-            // 
-            // characterStatus3
-            // 
-            this.characterStatus3.Location = new System.Drawing.Point(776, 98);
-            this.characterStatus3.Name = "characterStatus3";
-            this.characterStatus3.Size = new System.Drawing.Size(501, 47);
-            this.characterStatus3.TabIndex = 3;
-            this.characterStatus3.Visible = false;
-            // 
-            // characterStatus2
-            // 
-            this.characterStatus2.Location = new System.Drawing.Point(776, 51);
-            this.characterStatus2.Name = "characterStatus2";
-            this.characterStatus2.Size = new System.Drawing.Size(501, 47);
-            this.characterStatus2.TabIndex = 2;
-            this.characterStatus2.Visible = false;
-            // 
-            // characterStatus1
-            // 
-            this.characterStatus1.Location = new System.Drawing.Point(776, 2);
-            this.characterStatus1.Name = "characterStatus1";
-            this.characterStatus1.Size = new System.Drawing.Size(501, 47);
-            this.characterStatus1.TabIndex = 1;
-            this.characterStatus1.Visible = false;
             // 
             // skillList
             // 
@@ -262,7 +216,8 @@
             this.skillDescription,
             this.skillName,
             this.skillCost,
-            this.skillAffinity});
+            this.skillAffinity,
+            this.IsAvailable});
             this.skillList.Location = new System.Drawing.Point(0, 0);
             this.skillList.Name = "skillList";
             this.skillList.RowHeadersVisible = false;
@@ -273,6 +228,16 @@
             this.skillList.Visible = false;
             this.skillList.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.skillList_CellMouseDoubleClick);
             this.skillList.SelectionChanged += new System.EventHandler(this.skillList_SelectionChanged);
+            // 
+            // listTargets
+            // 
+            this.listTargets.FormattingEnabled = true;
+            this.listTargets.Location = new System.Drawing.Point(3, 0);
+            this.listTargets.Name = "listTargets";
+            this.listTargets.Size = new System.Drawing.Size(209, 199);
+            this.listTargets.TabIndex = 6;
+            this.listTargets.Visible = false;
+            this.listTargets.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listTargets_MouseDoubleClick);
             // 
             // skillId
             // 
@@ -312,6 +277,62 @@
             this.skillAffinity.ReadOnly = true;
             this.skillAffinity.Width = 44;
             // 
+            // IsAvailable
+            // 
+            this.IsAvailable.HeaderText = "IsAvailable";
+            this.IsAvailable.Name = "IsAvailable";
+            this.IsAvailable.ReadOnly = true;
+            this.IsAvailable.Visible = false;
+            this.IsAvailable.Width = 64;
+            // 
+            // battleLog
+            // 
+            this.battleLog.Location = new System.Drawing.Point(424, 3);
+            this.battleLog.Name = "battleLog";
+            this.battleLog.Size = new System.Drawing.Size(346, 187);
+            this.battleLog.TabIndex = 8;
+            // 
+            // characterStatus4
+            // 
+            this.characterStatus4.Location = new System.Drawing.Point(776, 147);
+            this.characterStatus4.Name = "characterStatus4";
+            this.characterStatus4.Size = new System.Drawing.Size(501, 47);
+            this.characterStatus4.TabIndex = 4;
+            this.characterStatus4.Visible = false;
+            // 
+            // characterStatus3
+            // 
+            this.characterStatus3.Location = new System.Drawing.Point(776, 98);
+            this.characterStatus3.Name = "characterStatus3";
+            this.characterStatus3.Size = new System.Drawing.Size(501, 47);
+            this.characterStatus3.TabIndex = 3;
+            this.characterStatus3.Visible = false;
+            // 
+            // characterStatus2
+            // 
+            this.characterStatus2.Location = new System.Drawing.Point(776, 51);
+            this.characterStatus2.Name = "characterStatus2";
+            this.characterStatus2.Size = new System.Drawing.Size(501, 47);
+            this.characterStatus2.TabIndex = 2;
+            this.characterStatus2.Visible = false;
+            // 
+            // characterStatus1
+            // 
+            this.characterStatus1.Location = new System.Drawing.Point(776, 2);
+            this.characterStatus1.Name = "characterStatus1";
+            this.characterStatus1.Size = new System.Drawing.Size(501, 47);
+            this.characterStatus1.TabIndex = 1;
+            this.characterStatus1.Visible = false;
+            // 
+            // lblWinLose
+            // 
+            this.lblWinLose.AutoSize = true;
+            this.lblWinLose.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblWinLose.Location = new System.Drawing.Point(502, 233);
+            this.lblWinLose.Name = "lblWinLose";
+            this.lblWinLose.Size = new System.Drawing.Size(0, 108);
+            this.lblWinLose.TabIndex = 9;
+            // 
             // BattleControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -346,11 +367,6 @@
         private System.Windows.Forms.PictureBox partySprite2;
         private System.Windows.Forms.PictureBox enemySprite;
         private System.Windows.Forms.DataGridView skillList;
-        private System.Windows.Forms.DataGridViewTextBoxColumn skillId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn skillDescription;
-        private System.Windows.Forms.DataGridViewTextBoxColumn skillName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn skillCost;
-        private System.Windows.Forms.DataGridViewImageColumn skillAffinity;
         private UserControls.CharacterStatus characterStatus4;
         private UserControls.CharacterStatus characterStatus3;
         private UserControls.CharacterStatus characterStatus2;
@@ -362,5 +378,12 @@
         private System.Windows.Forms.Button btnCancelCast;
         private System.Windows.Forms.FlowLayoutPanel flowTurnsPanel;
         private UserControls.BattleLog battleLog;
+        private System.Windows.Forms.DataGridViewTextBoxColumn skillId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn skillDescription;
+        private System.Windows.Forms.DataGridViewTextBoxColumn skillName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn skillCost;
+        private System.Windows.Forms.DataGridViewImageColumn skillAffinity;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn IsAvailable;
+        private System.Windows.Forms.Label lblWinLose;
     }
 }

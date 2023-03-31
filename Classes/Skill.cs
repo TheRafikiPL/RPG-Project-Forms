@@ -34,36 +34,26 @@ namespace RPG_Project
             int damage = 5;
             if(dmgType == Affinity.PHYSICAL)
             {
-                damage *= (int)Math.Sqrt(attacker.Strength / defender.Dexterity * power);
+                damage *= (int)Math.Sqrt((double)attacker.Strength / defender.Dexterity * power);
             }
             else
             {
-                damage *= (int)Math.Sqrt(attacker.Magic / defender.Dexterity * power);
-            }
-            if(attacker.CheckEffect(Effect.DMG_BUFF))
-            {
-                damage =(int)(damage * 1.25);
-            }
-            if (attacker.CheckEffect(Effect.DMG_DEBUFF))
-            {
-                damage = (int)(damage * 0.75);
-            }
-            if (defender.CheckEffect(Effect.DEF_BUFF))
-            {
-                damage = (int)(damage * 0.75);
-            }
-            if (defender.CheckEffect(Effect.DEF_DEBUFF))
-            {
-                damage = (int)(damage * 1.25);
+                damage *= (int)Math.Sqrt((double)attacker.Magic / defender.Dexterity * power);
             }
             return damage;
         }
-        public override string ToString()
-        {
-            return $"{name}\t{costValue} {costType}";
-        }
         public string Name { get { return name; } }
-        public string CostString { get { return $"{costValue} {costType}"; } }
+        public string CostString 
+        { 
+            get 
+            {
+                if(costType == CostType.HP)
+                {
+                    return $"{costValue}% {costType}";
+                }
+                return $"{costValue} {costType}"; 
+            } 
+        }
         public Image AffinityImage 
         { 
             get
@@ -103,12 +93,32 @@ namespace RPG_Project
         {
             get { return costType; }
         }
+        public Affinity DmgType
+        {
+            get { return dmgType; }
+        }
         public int CostValue
         {
-            get 
-            { 
-                return costValue;
+            get { return costValue; }
+        }
+        public bool CheckIfAvailable(Character c)
+        {
+            switch(costType)
+            {
+                case CostType.HP:
+                    if(c.CurrentHealth<=Math.Ceiling(costValue/100.0*c.Health))
+                    {
+                        return false;
+                    }
+                    break;
+                case CostType.MP:
+                    if(c.CurrentMana<costValue)
+                    {
+                        return false;
+                    }
+                    break;
             }
+            return true;
         }
     }
 }
