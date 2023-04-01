@@ -30,6 +30,9 @@
         {
             this.leaveButton = new System.Windows.Forms.Button();
             this.battlePanel = new System.Windows.Forms.Panel();
+            this.btnAiTurns = new System.Windows.Forms.Button();
+            this.checkBoxAiTurns = new System.Windows.Forms.CheckBox();
+            this.lblWinLose = new System.Windows.Forms.Label();
             this.flowTurnsPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.lblEnemyHP = new System.Windows.Forms.Label();
             this.enemyHPBar = new System.Windows.Forms.ProgressBar();
@@ -39,22 +42,21 @@
             this.partySprite2 = new System.Windows.Forms.PictureBox();
             this.partySprite1 = new System.Windows.Forms.PictureBox();
             this.battleUIPanel = new System.Windows.Forms.Panel();
+            this.battleLog = new RPG_Project.UserControls.BattleLog();
             this.btnCancelCast = new System.Windows.Forms.Button();
             this.txtSkillDesc = new System.Windows.Forms.TextBox();
+            this.characterStatus4 = new RPG_Project.UserControls.CharacterStatus();
+            this.characterStatus3 = new RPG_Project.UserControls.CharacterStatus();
+            this.characterStatus2 = new RPG_Project.UserControls.CharacterStatus();
+            this.characterStatus1 = new RPG_Project.UserControls.CharacterStatus();
             this.skillList = new System.Windows.Forms.DataGridView();
-            this.listTargets = new System.Windows.Forms.ListBox();
             this.skillId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.skillDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.skillName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.skillCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.skillAffinity = new System.Windows.Forms.DataGridViewImageColumn();
             this.IsAvailable = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.battleLog = new RPG_Project.UserControls.BattleLog();
-            this.characterStatus4 = new RPG_Project.UserControls.CharacterStatus();
-            this.characterStatus3 = new RPG_Project.UserControls.CharacterStatus();
-            this.characterStatus2 = new RPG_Project.UserControls.CharacterStatus();
-            this.characterStatus1 = new RPG_Project.UserControls.CharacterStatus();
-            this.lblWinLose = new System.Windows.Forms.Label();
+            this.listTargets = new System.Windows.Forms.ListBox();
             this.battlePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.enemySprite)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.partySprite4)).BeginInit();
@@ -78,6 +80,7 @@
             // 
             // battlePanel
             // 
+            this.battlePanel.Controls.Add(this.checkBoxAiTurns);
             this.battlePanel.Controls.Add(this.lblWinLose);
             this.battlePanel.Controls.Add(this.flowTurnsPanel);
             this.battlePanel.Controls.Add(this.lblEnemyHP);
@@ -93,6 +96,40 @@
             this.battlePanel.Name = "battlePanel";
             this.battlePanel.Size = new System.Drawing.Size(1280, 522);
             this.battlePanel.TabIndex = 1;
+            // 
+            // btnAiTurns
+            // 
+            this.btnAiTurns.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnAiTurns.Location = new System.Drawing.Point(123, 73);
+            this.btnAiTurns.Name = "btnAiTurns";
+            this.btnAiTurns.Size = new System.Drawing.Size(133, 38);
+            this.btnAiTurns.TabIndex = 11;
+            this.btnAiTurns.Text = "Next Turn";
+            this.btnAiTurns.UseVisualStyleBackColor = true;
+            this.btnAiTurns.Visible = false;
+            this.btnAiTurns.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // checkBoxAiTurns
+            // 
+            this.checkBoxAiTurns.AutoSize = true;
+            this.checkBoxAiTurns.Checked = true;
+            this.checkBoxAiTurns.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxAiTurns.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.checkBoxAiTurns.Location = new System.Drawing.Point(273, 20);
+            this.checkBoxAiTurns.Name = "checkBoxAiTurns";
+            this.checkBoxAiTurns.Size = new System.Drawing.Size(133, 28);
+            this.checkBoxAiTurns.TabIndex = 10;
+            this.checkBoxAiTurns.Text = "AI auto turns";
+            this.checkBoxAiTurns.UseVisualStyleBackColor = true;
+            // 
+            // lblWinLose
+            // 
+            this.lblWinLose.AutoSize = true;
+            this.lblWinLose.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblWinLose.Location = new System.Drawing.Point(502, 233);
+            this.lblWinLose.Name = "lblWinLose";
+            this.lblWinLose.Size = new System.Drawing.Size(0, 108);
+            this.lblWinLose.TabIndex = 9;
             // 
             // flowTurnsPanel
             // 
@@ -166,6 +203,7 @@
             // 
             // battleUIPanel
             // 
+            this.battleUIPanel.Controls.Add(this.btnAiTurns);
             this.battleUIPanel.Controls.Add(this.battleLog);
             this.battleUIPanel.Controls.Add(this.btnCancelCast);
             this.battleUIPanel.Controls.Add(this.txtSkillDesc);
@@ -180,6 +218,13 @@
             this.battleUIPanel.Name = "battleUIPanel";
             this.battleUIPanel.Size = new System.Drawing.Size(1280, 198);
             this.battleUIPanel.TabIndex = 2;
+            // 
+            // battleLog
+            // 
+            this.battleLog.Location = new System.Drawing.Point(424, 3);
+            this.battleLog.Name = "battleLog";
+            this.battleLog.Size = new System.Drawing.Size(346, 187);
+            this.battleLog.TabIndex = 8;
             // 
             // btnCancelCast
             // 
@@ -202,6 +247,38 @@
             this.txtSkillDesc.Size = new System.Drawing.Size(203, 187);
             this.txtSkillDesc.TabIndex = 5;
             this.txtSkillDesc.Visible = false;
+            // 
+            // characterStatus4
+            // 
+            this.characterStatus4.Location = new System.Drawing.Point(776, 147);
+            this.characterStatus4.Name = "characterStatus4";
+            this.characterStatus4.Size = new System.Drawing.Size(501, 47);
+            this.characterStatus4.TabIndex = 4;
+            this.characterStatus4.Visible = false;
+            // 
+            // characterStatus3
+            // 
+            this.characterStatus3.Location = new System.Drawing.Point(776, 98);
+            this.characterStatus3.Name = "characterStatus3";
+            this.characterStatus3.Size = new System.Drawing.Size(501, 47);
+            this.characterStatus3.TabIndex = 3;
+            this.characterStatus3.Visible = false;
+            // 
+            // characterStatus2
+            // 
+            this.characterStatus2.Location = new System.Drawing.Point(776, 51);
+            this.characterStatus2.Name = "characterStatus2";
+            this.characterStatus2.Size = new System.Drawing.Size(501, 47);
+            this.characterStatus2.TabIndex = 2;
+            this.characterStatus2.Visible = false;
+            // 
+            // characterStatus1
+            // 
+            this.characterStatus1.Location = new System.Drawing.Point(776, 2);
+            this.characterStatus1.Name = "characterStatus1";
+            this.characterStatus1.Size = new System.Drawing.Size(501, 47);
+            this.characterStatus1.TabIndex = 1;
+            this.characterStatus1.Visible = false;
             // 
             // skillList
             // 
@@ -228,16 +305,6 @@
             this.skillList.Visible = false;
             this.skillList.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.skillList_CellMouseDoubleClick);
             this.skillList.SelectionChanged += new System.EventHandler(this.skillList_SelectionChanged);
-            // 
-            // listTargets
-            // 
-            this.listTargets.FormattingEnabled = true;
-            this.listTargets.Location = new System.Drawing.Point(3, 0);
-            this.listTargets.Name = "listTargets";
-            this.listTargets.Size = new System.Drawing.Size(209, 199);
-            this.listTargets.TabIndex = 6;
-            this.listTargets.Visible = false;
-            this.listTargets.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listTargets_MouseDoubleClick);
             // 
             // skillId
             // 
@@ -285,53 +352,15 @@
             this.IsAvailable.Visible = false;
             this.IsAvailable.Width = 64;
             // 
-            // battleLog
+            // listTargets
             // 
-            this.battleLog.Location = new System.Drawing.Point(424, 3);
-            this.battleLog.Name = "battleLog";
-            this.battleLog.Size = new System.Drawing.Size(346, 187);
-            this.battleLog.TabIndex = 8;
-            // 
-            // characterStatus4
-            // 
-            this.characterStatus4.Location = new System.Drawing.Point(776, 147);
-            this.characterStatus4.Name = "characterStatus4";
-            this.characterStatus4.Size = new System.Drawing.Size(501, 47);
-            this.characterStatus4.TabIndex = 4;
-            this.characterStatus4.Visible = false;
-            // 
-            // characterStatus3
-            // 
-            this.characterStatus3.Location = new System.Drawing.Point(776, 98);
-            this.characterStatus3.Name = "characterStatus3";
-            this.characterStatus3.Size = new System.Drawing.Size(501, 47);
-            this.characterStatus3.TabIndex = 3;
-            this.characterStatus3.Visible = false;
-            // 
-            // characterStatus2
-            // 
-            this.characterStatus2.Location = new System.Drawing.Point(776, 51);
-            this.characterStatus2.Name = "characterStatus2";
-            this.characterStatus2.Size = new System.Drawing.Size(501, 47);
-            this.characterStatus2.TabIndex = 2;
-            this.characterStatus2.Visible = false;
-            // 
-            // characterStatus1
-            // 
-            this.characterStatus1.Location = new System.Drawing.Point(776, 2);
-            this.characterStatus1.Name = "characterStatus1";
-            this.characterStatus1.Size = new System.Drawing.Size(501, 47);
-            this.characterStatus1.TabIndex = 1;
-            this.characterStatus1.Visible = false;
-            // 
-            // lblWinLose
-            // 
-            this.lblWinLose.AutoSize = true;
-            this.lblWinLose.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblWinLose.Location = new System.Drawing.Point(502, 233);
-            this.lblWinLose.Name = "lblWinLose";
-            this.lblWinLose.Size = new System.Drawing.Size(0, 108);
-            this.lblWinLose.TabIndex = 9;
+            this.listTargets.FormattingEnabled = true;
+            this.listTargets.Location = new System.Drawing.Point(3, 0);
+            this.listTargets.Name = "listTargets";
+            this.listTargets.Size = new System.Drawing.Size(209, 199);
+            this.listTargets.TabIndex = 6;
+            this.listTargets.Visible = false;
+            this.listTargets.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listTargets_MouseDoubleClick);
             // 
             // BattleControl
             // 
@@ -385,5 +414,7 @@
         private System.Windows.Forms.DataGridViewImageColumn skillAffinity;
         private System.Windows.Forms.DataGridViewCheckBoxColumn IsAvailable;
         private System.Windows.Forms.Label lblWinLose;
+        private System.Windows.Forms.CheckBox checkBoxAiTurns;
+        private System.Windows.Forms.Button btnAiTurns;
     }
 }

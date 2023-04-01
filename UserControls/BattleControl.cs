@@ -106,6 +106,7 @@ namespace RPG_Project
             TurnQueue.Clear();
             lblWinLose.Text = "";
             battleLog.Clear();
+            btnAiTurns.Visible = false;
         }
 
         void SetCharacters()
@@ -168,6 +169,7 @@ namespace RPG_Project
             List<KeyValuePair<PictureBox, Character>> temp = new List<KeyValuePair<PictureBox, Character>>();
             if(BattleProperties.IsPlayerTurn)
             {
+                btnAiTurns.Visible = false;
                 for (int i = 0; i < BattleProperties.Party.Count; i++)
                 {
                     if(!BattleProperties.Party[i].CheckEffect(Effect.KNOCKDOWN))
@@ -179,6 +181,7 @@ namespace RPG_Project
             }
             else
             {
+                btnAiTurns.Visible = true;
                 for (int i = 0; i < BattleProperties.Troops.Count; i++)
                 {
                     BattleProperties.Turns.Add(true);
@@ -273,14 +276,17 @@ namespace RPG_Project
             UpdateInfo();
             CheckLose();
             CheckWin();
-            if(BattleProperties.Turns.Count > 0)
+            if (checkBoxAiTurns.Checked || BattleProperties.IsPlayerTurn)
             {
-                Current = TurnQueue.Dequeue();
-                StartTurn();
-            }
-            else
-            {
-                EndSide();
+                if (BattleProperties.Turns.Count > 0)
+                {
+                    Current = TurnQueue.Dequeue();
+                    StartTurn();
+                }
+                else
+                {
+                    EndSide();
+                }
             }
         }
         private void BattleControl_VisibleChanged(object sender, EventArgs e)
@@ -507,7 +513,8 @@ namespace RPG_Project
                 case TargetChoice.ALL_ENEMY:
                     foreach(Character c in BattleProperties.Party)
                     {
-                        Boss_AI.targets.Add(c);
+                        if(!c.CheckEffect(Effect.KNOCKDOWN))
+                            Boss_AI.targets.Add(c);
                     }
                     break;
             }
@@ -519,6 +526,19 @@ namespace RPG_Project
             BattleProperties.CalculateTurns(CheckAffinityRelations(list));
             FillTurnsPanel();
             EndTurn();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (BattleProperties.Turns.Count > 0)
+            {
+                Current = TurnQueue.Dequeue();
+                StartTurn();
+            }
+            else
+            {
+                EndSide();
+            }
         }
     }
 }
