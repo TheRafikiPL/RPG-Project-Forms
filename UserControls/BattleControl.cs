@@ -210,10 +210,6 @@ namespace RPG_Project
         }
         public void StartTurn()
         {
-            if (!battleOn)
-            {
-                return;
-            } 
             TurnQueue.Enqueue(Current);
             foreach(PictureBox pictureBox in pictureBoxes)
             {
@@ -276,6 +272,10 @@ namespace RPG_Project
             UpdateInfo();
             CheckLose();
             CheckWin();
+            if(!battleOn)
+            {
+                return;
+            }
             if (checkBoxAiTurns.Checked || BattleProperties.IsPlayerTurn)
             {
                 if (BattleProperties.Turns.Count > 0)
