@@ -25,6 +25,7 @@ namespace RPG_Project.UserControls
             barHP.Value = c.CurrentHealth;
             barMP.Maximum = c.Mana;
             barMP.Value = c.CurrentMana;
+            effectsLabel.Text = c.EffectsToString();
         }
         public void MenImDead()
         {

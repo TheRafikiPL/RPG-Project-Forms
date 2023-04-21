@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -76,6 +77,7 @@ namespace RPG_Project
         }
         public void UpdateInfo()
         {
+            lblEnemyEffects.Text = BattleProperties.Troops[0].EffectsToString();
             enemyHPBar.Value = BattleProperties.Troops[0].CurrentHealth;
             lblEnemyHP.Text = $"{BattleProperties.Troops[0].CurrentHealth.ToString()}/{BattleProperties.Troops[0].Health.ToString()}";
             for (int i = 0; i < characterStatuses.Count; i++)
@@ -211,7 +213,8 @@ namespace RPG_Project
         public void StartTurn()
         {
             TurnQueue.Enqueue(Current);
-            foreach(PictureBox pictureBox in pictureBoxes)
+            Current.Value.UpdateEffects();
+            foreach (PictureBox pictureBox in pictureBoxes)
             {
                 pictureBox.BorderStyle = BorderStyle.None;
             }
@@ -349,13 +352,13 @@ namespace RPG_Project
             {
                 return;
             }
-            if(selectedSkill.DmgType==Affinity.NONE)
+            /*if(selectedSkill.DmgType==Affinity.NONE)
             {
                 BattleProperties.CalculateTurns(AffinityRelation.NEUTRAL);
                 FillTurnsPanel();
                 EndTurn();
                 return;
-            }
+            }*/
             listTargets.Visible = false;
             btnCancelCast.Visible = false;
             List<AffinityRelation> list = new List<AffinityRelation>();
@@ -399,7 +402,19 @@ namespace RPG_Project
                     Current.Value.SubMana(selectedSkill.CostValue);
                 }
             }
-            if(damage==0)
+            if (selectedSkill.DmgType == Affinity.NONE)
+            {
+                if (selectedSkill.Power > 0)
+                {
+                    target.AddHP(selectedSkill.CalculateHealing(Current.Value, target));
+                }
+                else
+                {
+                    selectedSkill.CalculateEffect(Current.Value,target);
+                }
+                return;
+            }
+            if (damage==0)
             {
                 damage = selectedSkill.CalculateDamage(Current.Value, target);
             }

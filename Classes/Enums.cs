@@ -36,6 +36,7 @@ namespace RPG_Project
     public enum Effect
     {
         KNOCKDOWN,
+        GUARD,
         DMG_BUFF,
         DEF_BUFF,
         DMG_DEBUFF,

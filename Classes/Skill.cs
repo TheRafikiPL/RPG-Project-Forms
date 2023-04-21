@@ -2,10 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RPG_Project
 {
@@ -18,7 +14,8 @@ namespace RPG_Project
         int power;
         Affinity dmgType;
         TargetChoice choice;
-        public Skill(string name, string description, int costValue, CostType costType, int power, Affinity dmgType, TargetChoice choice)
+        Dictionary<Effect,int> skillEffects;
+        public Skill(string name, string description, int costValue, CostType costType, int power, Affinity dmgType, TargetChoice choice, params KeyValuePair<Effect, int>[] effects)
         {
             this.name = name;
             this.description = description;
@@ -26,22 +23,14 @@ namespace RPG_Project
             this.costType = costType;
             this.power = power;
             this.dmgType = dmgType;
-            this.choice = choice; 
+            this.choice = choice;
+            this.skillEffects = new Dictionary<Effect,int>();
+            foreach (KeyValuePair<Effect,int> effect in effects)
+            {
+                skillEffects.Add(effect.Key, effect.Value);
+            }
         }
 
-        public int CalculateDamage(Character attacker, Character defender)
-        {
-            int damage = 5;
-            if(dmgType == Affinity.PHYSICAL)
-            {
-                damage *= (int)Math.Sqrt((double)attacker.Strength / defender.Dexterity * power);
-            }
-            else
-            {
-                damage *= (int)Math.Sqrt((double)attacker.Magic / defender.Dexterity * power);
-            }
-            return damage;
-        }
         public string Name { get { return name; } }
         public string CostString 
         { 
@@ -101,6 +90,14 @@ namespace RPG_Project
         {
             get { return costValue; }
         }
+        public int Power
+        {
+            get { return power; }
+        }
+        public Dictionary<Effect,int> SkillEffects
+        {
+            get { return skillEffects; }
+        }
         public bool CheckIfAvailable(Character c)
         {
             switch(costType)
@@ -119,6 +116,37 @@ namespace RPG_Project
                     break;
             }
             return true;
+        }
+        public int CalculateDamage(Character attacker, Character defender)
+        {
+            int damage = 5;
+            if (dmgType == Affinity.PHYSICAL)
+            {
+                damage = (int)(damage * Math.Sqrt((double)attacker.Strength / defender.Dexterity * power));
+            }
+            else
+            {
+                damage = (int)(damage * Math.Sqrt((double)attacker.Magic / defender.Dexterity * power));
+            }
+            if(defender.CheckEffect(Effect.GUARD))
+            {
+                damage = (int)(damage * 0.5);
+                defender.DecreseEffectTurns(Effect.GUARD);
+            }
+            return damage;
+        }
+        public int CalculateHealing(Character caster, Character receiver)
+        {
+            int heal = receiver.Health;
+            heal = (int)(heal * (power / 100.0f));
+            return heal;
+        }
+        public void CalculateEffect(Character caster, Character receiver)
+        {
+            foreach(KeyValuePair<Effect, int> val in skillEffects)
+            {
+                receiver.AddEffect(val);
+            }
         }
     }
 }

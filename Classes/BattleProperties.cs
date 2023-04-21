@@ -90,7 +90,7 @@ namespace RPG_Project
         static public void FillSkillList()
         {
             SkillList.Add(new Skill("Attack", "Default attack", 0, CostType.None, 100, Affinity.PHYSICAL,TargetChoice.ONE_ENEMY));
-            SkillList.Add(new Skill("Guard", "Half damage from next attack", 0, CostType.None, 0, Affinity.NONE, TargetChoice.SELF));
+            SkillList.Add(new Skill("Guard", "Half damage from next attack", 0, CostType.None, 0, Affinity.NONE, TargetChoice.SELF,new KeyValuePair<Effect, int>(Effect.GUARD,1)));
             SkillList.Add(new Skill("Strike", "High physical damage to 1 oponnent", 13, CostType.HP, 300, Affinity.PHYSICAL, TargetChoice.ONE_ENEMY));
             SkillList.Add(new Skill("Blade Rain", "High physical damage to all oponnents", 26, CostType.HP, 300, Affinity.PHYSICAL, TargetChoice.ALL_ENEMY));
             SkillList.Add(new Skill("Fire Ball", "High fire damage to 1 oponnent", 16, CostType.MP, 300, Affinity.FIRE, TargetChoice.ONE_ENEMY));
@@ -106,8 +106,8 @@ namespace RPG_Project
             SkillList.Add(new Skill("Dark Missile", "High darkness damage to 1 oponnent", 16, CostType.MP, 300, Affinity.DARKNESS, TargetChoice.ONE_ENEMY));
             SkillList.Add(new Skill("Halls of Darkness", "High darkness damage to all oponnents", 30, CostType.MP, 300, Affinity.DARKNESS, TargetChoice.ALL_ENEMY));
             SkillList.Add(new Skill("God's Judgment", "High almighty damage to all oponnents", 40, CostType.MP, 300, Affinity.ALMIGHTY, TargetChoice.ALL_ENEMY));
-            SkillList.Add(new Skill("Great Heal", "Heal 100% HP for one ally", 30, CostType.MP, 0, Affinity.NONE, TargetChoice.ONE_PARTY));
-            SkillList.Add(new Skill("Salvation", "Heal 100% HP for all allies", 50, CostType.MP, 0, Affinity.NONE, TargetChoice.ALL_PARTY));
+            SkillList.Add(new Skill("Great Heal", "Heal 100% HP for one ally", 30, CostType.MP, 100, Affinity.NONE, TargetChoice.ONE_PARTY));
+            SkillList.Add(new Skill("Salvation", "Heal 100% HP for all allies", 50, CostType.MP, 100, Affinity.NONE, TargetChoice.ALL_PARTY));
         }
     }
 }

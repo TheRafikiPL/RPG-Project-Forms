@@ -33,6 +33,7 @@
             this.barMP = new System.Windows.Forms.ProgressBar();
             this.lblHP = new System.Windows.Forms.Label();
             this.lblMP = new System.Windows.Forms.Label();
+            this.effectsLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblName
@@ -84,10 +85,19 @@
             this.lblMP.TabIndex = 4;
             this.lblMP.Text = "0/100 MP";
             // 
+            // effectsLabel
+            // 
+            this.effectsLabel.AutoSize = true;
+            this.effectsLabel.Location = new System.Drawing.Point(4, 31);
+            this.effectsLabel.Name = "effectsLabel";
+            this.effectsLabel.Size = new System.Drawing.Size(0, 13);
+            this.effectsLabel.TabIndex = 5;
+            // 
             // CharacterStatus
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.effectsLabel);
             this.Controls.Add(this.lblMP);
             this.Controls.Add(this.lblHP);
             this.Controls.Add(this.barMP);
@@ -107,5 +117,6 @@
         private System.Windows.Forms.ProgressBar barMP;
         private System.Windows.Forms.Label lblHP;
         private System.Windows.Forms.Label lblMP;
+        private System.Windows.Forms.Label effectsLabel;
     }
 }

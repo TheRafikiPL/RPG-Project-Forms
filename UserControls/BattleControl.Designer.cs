@@ -30,7 +30,6 @@
         {
             this.leaveButton = new System.Windows.Forms.Button();
             this.battlePanel = new System.Windows.Forms.Panel();
-            this.btnAiTurns = new System.Windows.Forms.Button();
             this.checkBoxAiTurns = new System.Windows.Forms.CheckBox();
             this.lblWinLose = new System.Windows.Forms.Label();
             this.flowTurnsPanel = new System.Windows.Forms.FlowLayoutPanel();
@@ -41,6 +40,7 @@
             this.partySprite3 = new System.Windows.Forms.PictureBox();
             this.partySprite2 = new System.Windows.Forms.PictureBox();
             this.partySprite1 = new System.Windows.Forms.PictureBox();
+            this.btnAiTurns = new System.Windows.Forms.Button();
             this.battleUIPanel = new System.Windows.Forms.Panel();
             this.battleLog = new RPG_Project.UserControls.BattleLog();
             this.btnCancelCast = new System.Windows.Forms.Button();
@@ -57,6 +57,7 @@
             this.skillAffinity = new System.Windows.Forms.DataGridViewImageColumn();
             this.IsAvailable = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.listTargets = new System.Windows.Forms.ListBox();
+            this.lblEnemyEffects = new System.Windows.Forms.Label();
             this.battlePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.enemySprite)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.partySprite4)).BeginInit();
@@ -80,6 +81,7 @@
             // 
             // battlePanel
             // 
+            this.battlePanel.Controls.Add(this.lblEnemyEffects);
             this.battlePanel.Controls.Add(this.checkBoxAiTurns);
             this.battlePanel.Controls.Add(this.lblWinLose);
             this.battlePanel.Controls.Add(this.flowTurnsPanel);
@@ -96,18 +98,6 @@
             this.battlePanel.Name = "battlePanel";
             this.battlePanel.Size = new System.Drawing.Size(1280, 522);
             this.battlePanel.TabIndex = 1;
-            // 
-            // btnAiTurns
-            // 
-            this.btnAiTurns.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnAiTurns.Location = new System.Drawing.Point(123, 73);
-            this.btnAiTurns.Name = "btnAiTurns";
-            this.btnAiTurns.Size = new System.Drawing.Size(133, 38);
-            this.btnAiTurns.TabIndex = 11;
-            this.btnAiTurns.Text = "Next Turn";
-            this.btnAiTurns.UseVisualStyleBackColor = true;
-            this.btnAiTurns.Visible = false;
-            this.btnAiTurns.Click += new System.EventHandler(this.button1_Click);
             // 
             // checkBoxAiTurns
             // 
@@ -200,6 +190,18 @@
             this.partySprite1.TabIndex = 1;
             this.partySprite1.TabStop = false;
             this.partySprite1.Visible = false;
+            // 
+            // btnAiTurns
+            // 
+            this.btnAiTurns.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnAiTurns.Location = new System.Drawing.Point(123, 73);
+            this.btnAiTurns.Name = "btnAiTurns";
+            this.btnAiTurns.Size = new System.Drawing.Size(133, 38);
+            this.btnAiTurns.TabIndex = 11;
+            this.btnAiTurns.Text = "Next Turn";
+            this.btnAiTurns.UseVisualStyleBackColor = true;
+            this.btnAiTurns.Visible = false;
+            this.btnAiTurns.Click += new System.EventHandler(this.button1_Click);
             // 
             // battleUIPanel
             // 
@@ -362,6 +364,14 @@
             this.listTargets.Visible = false;
             this.listTargets.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listTargets_MouseDoubleClick);
             // 
+            // lblEnemyEffects
+            // 
+            this.lblEnemyEffects.AutoSize = true;
+            this.lblEnemyEffects.Location = new System.Drawing.Point(1134, 361);
+            this.lblEnemyEffects.Name = "lblEnemyEffects";
+            this.lblEnemyEffects.Size = new System.Drawing.Size(0, 13);
+            this.lblEnemyEffects.TabIndex = 11;
+            // 
             // BattleControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -416,5 +426,6 @@
         private System.Windows.Forms.Label lblWinLose;
         private System.Windows.Forms.CheckBox checkBoxAiTurns;
         private System.Windows.Forms.Button btnAiTurns;
+        private System.Windows.Forms.Label lblEnemyEffects;
     }
 }

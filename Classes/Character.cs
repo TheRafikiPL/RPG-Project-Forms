@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RPG_Project
 {
@@ -24,7 +20,7 @@ namespace RPG_Project
         Image sprite;
         AffinityRelation[] affinities;
         List<int> skills;
-        List<Effect> effects;
+        Dictionary<Effect, int> effects;
         public Character(string name, int health, int mana, int strength, int magic, int dexterity, int agility, int luck)
         {
             id = new Guid();
@@ -46,7 +42,7 @@ namespace RPG_Project
             skills = new List<int>();
             skills.Add(0);
             skills.Add(1);
-            effects = new List<Effect>();
+            effects = new Dictionary<Effect, int>();
         }
         public List<int> Skills
         {
@@ -108,13 +104,22 @@ namespace RPG_Project
         {
             return sprite;
         }
-        public void AddEffect(Effect e)
+        public void AddEffect(Effect e, int duration)
         {
-            effects.Add(e);
+            effects.Add(e,duration);
         }
         public bool CheckEffect(Effect e)
         {
-            return effects.Contains(e);
+            return effects.ContainsKey(e);
+        }
+        public string EffectsToString()
+        {
+            string tmp = "";
+            foreach (KeyValuePair<Effect, int> val in effects)
+            {
+                tmp += $"{val.Key} - {val.Value}, ";
+            }
+            return tmp;
         }
         public override string ToString()
         {
@@ -162,7 +167,7 @@ namespace RPG_Project
             if (currentHealth < 0)
             {
                 currentHealth = 0;
-                AddEffect(Effect.KNOCKDOWN);
+                AddEffect(Effect.KNOCKDOWN,int.MaxValue);
             }
         }
         public void SubMana(int mp)
@@ -171,6 +176,53 @@ namespace RPG_Project
             if (currentMana < 0)
             {
                 currentMana = 0;
+            }
+        }
+        public void AddEffect(KeyValuePair<Effect, int> tmp)
+        {
+            if(!effects.ContainsKey(tmp.Key))
+            {
+                effects.Add(tmp.Key, tmp.Value);
+            }
+            else if(effects[tmp.Key] < tmp.Value)
+            {
+                effects[tmp.Key] = tmp.Value;
+            }
+        }
+        public void DecreseEffectTurns(Effect e, int val=1)
+        {
+            effects[e] -= val;
+            if(effects[e] <= 0)
+            {
+                effects.Remove(e);
+            }
+        }
+        public void ClearEffect(Effect e)
+        {
+            if(effects.ContainsKey(e))
+            {
+                effects.Remove(e);
+            }
+        }
+        public void UpdateEffects()
+        {
+            List<Effect> toDelete = new List<Effect>();
+            List<Effect> toDeinc = new List<Effect>();
+            foreach (KeyValuePair<Effect, int> kvp in effects)
+            {
+                toDeinc.Add(kvp.Key);
+                if(kvp.Value <= 0)
+                {
+                    toDelete.Add(kvp.Key);
+                }
+            }
+            for (int i = 0; i < toDeinc.Count; i++)
+            {
+                effects[toDeinc[i]]--;
+            }
+            for (int i = 0; i < toDelete.Count; i++)
+            {
+                effects.Remove(toDelete[i]);
             }
         }
     }
